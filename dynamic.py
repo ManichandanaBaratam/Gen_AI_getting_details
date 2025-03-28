@@ -63,16 +63,27 @@ def extract_company_details(text, website, retries=3):
         return ["No content available"] * 6
 
     prompt = f"""
-    Extract key details about {website} from the text below. Provide only direct answers, no extra text:
-    
-    1. Mission Statement:
-    2. Products or Services:
-    3. Founded (Year & Founders):
-    4. Headquarters Location:
-    5. Key Executives:
-    6. Notable Awards:
-    
+    Extract the following details about {website} from the given text. 
+    Ensure that each response is **detailed and accurate**, without extra commentary.
+
+    1. **Mission Statement**: Clearly state the company's mission.
+    2. **Products or Services**: List the main products or services the company provides.
+    3. **Founded (Year & Founders)**: Mention the year of founding and names of the founders.
+    4. **Headquarters Location**: Provide the city and country of the company's headquarters.
+    5. **Key Executives**: List key executives such as CEO, CFO, and other leadership roles.
+    6. **Notable Awards**: Mention any industry recognitions, notable awards, or achievements.
+
     Text: {text}
+
+    Provide your response in the following format:
+    1. Mission Statement: ...
+    2. Products or Services: ...
+    3. Founded (Year & Founders): ...
+    4. Headquarters Location: ...
+    5. Key Executives: ...
+    6. Notable Awards: ...
+
+    Respond **only** with the extracted details, no extra text.
     """
     
     model = genai.GenerativeModel("gemini-1.5-flash")
@@ -90,7 +101,7 @@ def extract_company_details(text, website, retries=3):
 
     return ["AI extraction failed"] * 6
 
-def save_to_csv(data, filename="result.csv"):
+def save_to_csv(data, filename="result2.csv"):
     """Saves extracted data to CSV."""
     file_exists = os.path.isfile(filename)
 
@@ -106,7 +117,13 @@ def save_to_csv(data, filename="result.csv"):
 
 def main():
     websites = [
-        "https://www.boeing.com/company"
+        "https://www.boeing.com/company",
+            "https://www.goldmansachs.com",
+    "https://corporate.exxonmobil.com",
+    "https://www.hsbc.com",
+    "https://www.volkswagenag.com",
+    "https://www.ibm.com",
+    "https://www.unilever.com"
     ]
     all_data = []
 
