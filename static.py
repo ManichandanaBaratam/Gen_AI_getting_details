@@ -1,13 +1,14 @@
-import requests
-from bs4 import BeautifulSoup
-import json
-import google.generativeai as genai
 import os
 import re
+import json
+import time
+import requests
 import pandas as pd
+import google.generativeai as genai
+from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 from dotenv import load_dotenv
-import time
+
 
 load_dotenv()
 genai_api_key = os.getenv("GENAI_API_KEY")
